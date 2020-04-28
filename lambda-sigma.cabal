@@ -39,3 +39,15 @@ library
 
   -- Base language which the package is written in.
   default-language:    Haskell2010
+
+
+Test-Suite ls-eval-test
+  Type:                exitcode-stdio-1.0
+  Main-is:             Eval.hs
+  build-depends:       base >= 4.12 && <= 5.0
+                     , containers ^>= 0.6
+                     , mtl >=2.2.1 && < 2.3
+                     , lambda-sigma
+
+  hs-source-dirs:      test
+  default-language:    Haskell2010
