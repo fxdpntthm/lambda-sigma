@@ -55,7 +55,7 @@ eval (EApp fn arg) = case (eval fn) of
   _      -> error $ "Cannot apply " ++ show fn ++ " to " ++ show arg
 
  -- simplify a[s] 
-eval (ESub e s)  = case (e, s) of
+eval (ESub e s)  = case (eval e, s) of
   -- e[id] = e 
   (e', SId)            -> eval e'
 
