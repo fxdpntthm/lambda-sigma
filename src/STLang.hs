@@ -1,6 +1,7 @@
 {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 
 module STLang where
 
@@ -58,22 +59,22 @@ instance Lang TExpr where
   eval (TESub te ts) = undefined
   eval e = error $ "Oops! Cannot evaluate" ++ show e
 
+instance Lang TSubst where
+  eval = id
 
-
-
--- Interpretation of typed λσ calculus in untyped λσ calculus
--- ⟦ . ⟧ -> Expr 
-interp :: TExpr -> Expr
-interp (TEVar n)        = EVar n      
-interp (TELam _ te)     = ELam $ interp te
-interp (TEApp te te')   = EApp (interp te) (interp te')      
-interp (TESub te ts)    = ESub (interp te) (sinterp ts) 
+instance Interpretable TExpr Expr where
+  interp :: TExpr -> Expr
+  interp (TEVar n)        = EVar n
+  interp (TELam _ te)     = ELam $ interp te
+  interp (TEApp te te')   = EApp (interp te) (interp te')      
+  interp (TESub te ts)    = ESub (interp te) (interp ts) 
 
 -- interpretation of typed substitutions gives untyped λσ calculus substitutions
 -- ⟦ . ⟧ -> Subst
-sinterp :: TSubst -> Subst
-sinterp TSId              = SId   
-sinterp TSUp              = SUp
-sinterp (TSCons te _ ts)  = SCons (interp te) (sinterp ts)  
-sinterp (TSComp te te')   = SComp (sinterp te) (sinterp te')
+instance Interpretable TSubst Subst where
+  interp :: TSubst -> Subst
+  interp TSId              = SId   
+  interp TSUp              = SUp
+  interp (TSCons te _ ts)  = SCons (interp te) (interp ts)  
+  interp (TSComp te te')   = SComp (interp te) (interp te')
 
