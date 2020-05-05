@@ -12,13 +12,13 @@ EVar 0
 ELam (EVar 1)
 
 -- Type checking typed Lambda
-λ> chkExp [TVar 1] (TEVar 0) (TVar 0)
+λ> chkE [TArr K K] (TEVar 0) (K)
 NotOK
 
-λ> chkExp [] (TELam (TVar 1) (TEVar 0)) (TArr (TVar 1) (TVar 1))
+λ> chkE [] (TELam K (TEVar 0)) (TArr K K)
 OK
 
 -- Inferring Expression
-λ> inferExp (TELam (TVar 1) (TEVar 0))
-(TArr (TVar 1) (TVar 1))
+λ> synT [] (TELam K (TEVar 0))
+(TArr K K)
 ```
