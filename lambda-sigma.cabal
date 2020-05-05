@@ -6,7 +6,14 @@ cabal-version:       >= 2.0
 name:                lambda-sigma
 version:             0.1.0.0
 -- synopsis:
--- description: Some fun with explicit lambda calculus 
+description:                
+    Toy implimentation of explicit-substitution lamba calculus
+
+    Abadi, M., L. Cardelli, P.-L. Curien, and J.-J. Levy. 1989. “Explicit Substitutions.”
+    In Proceedings of the 17th ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages, 31–46. POPL ’90.
+    San Francisco, California, USA: Association for Computing Machinery.
+    https://doi.org/10.1145/96709.96712.
+ 
 -- bug-reports:
 
 license-file:        LICENSE
@@ -22,9 +29,12 @@ extra-source-files:  CHANGELOG.md
 library
   -- Modules exported by the library.
   exposed-modules:   Language
+                     TypedLanguage
+                     Common
+                     TypeChecker
 
   -- Modules included in this library but not exported.
-  -- other-modules:       
+  other-modules: Examples       
 
   -- LANGUAGE extensions used by modules in this package.
   -- other-extensions:
