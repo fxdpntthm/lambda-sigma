@@ -2,7 +2,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-module TypedLanguage where
+module STLang where
 
 import qualified Data.Map as Map
 import qualified Data.Set as Set
@@ -12,7 +12,7 @@ import Data.Set (Set)
 
 import Common
 
-import Language
+import UTLang
 
 -- Types A, B ::= K | A -> B 
 data Type = K | TArr Type Type
@@ -54,10 +54,15 @@ instance Lang TExpr where
   eval :: TExpr -> TExpr
   eval v@(TEVar _)     = v 
   eval l@(TELam _ _)   = l 
-  eval (TEApp te te')  = undefined
-  eval (TESub te ts) = undefined  
+  eval (TEApp te@(TELam _ b) te') = undefined  
+  eval (TESub te ts) = undefined
+  eval e = error $ "Oops! Cannot evaluate" ++ show e
+
+
+
 
 -- Interpretation of typed λσ calculus in untyped λσ calculus
+-- ⟦ . ⟧ -> Expr 
 interp :: TExpr -> Expr
 interp (TEVar n)        = EVar n      
 interp (TELam _ te)     = ELam $ interp te
@@ -65,6 +70,7 @@ interp (TEApp te te')   = EApp (interp te) (interp te')
 interp (TESub te ts)    = ESub (interp te) (sinterp ts) 
 
 -- interpretation of typed substitutions gives untyped λσ calculus substitutions
+-- ⟦ . ⟧ -> Subst
 sinterp :: TSubst -> Subst
 sinterp TSId              = SId   
 sinterp TSUp              = SUp

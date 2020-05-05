@@ -1,7 +1,9 @@
 module Main where
 
-import Language
-import TypedLanguage
+
+import Common
+import UTLang
+import STLang
 import Examples
 
 main = do putStrLn "Testing: "

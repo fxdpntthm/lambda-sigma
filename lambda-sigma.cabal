@@ -28,13 +28,14 @@ extra-source-files:  CHANGELOG.md
 
 library
   -- Modules exported by the library.
-  exposed-modules:   Language
-                     TypedLanguage
+  exposed-modules:   UTLang
+                     STLang
                      Common
-                     TypeChecker
+                     STTypeChecker
+                     Examples
 
   -- Modules included in this library but not exported.
-  other-modules: Examples       
+  -- other-modules: 
 
   -- LANGUAGE extensions used by modules in this package.
   -- other-extensions:

@@ -1,9 +1,9 @@
 module Examples where
 
 import Common
-import Language
-import TypedLanguage
-import TypeChecker
+import UTLang
+import STLang
+import STTypeChecker
 
 -- Some simple examples for untyped terms
 expId = ELam (EVar 0)  

@@ -1,7 +1,7 @@
 {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-module Language where
+module UTLang where
 
 import qualified Data.Map as Map
 import qualified Data.Set as Set
