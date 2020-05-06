@@ -14,13 +14,13 @@ description:
     San Francisco, California, USA: Association for Computing Machinery.
     https://doi.org/10.1145/96709.96712.
  
--- bug-reports:
+bug-reports:         https://github.com/apoorvingle/lambda-sigma/issues
 
 license-file:        LICENSE
 license:             MIT
 
 author:              Apoorv Ingle
-maintainer:          ani@ku.edu
+maintainer:          apoorv.ingle@gmail.com
 -- copyright:
 -- category:
 build-type:          Simple
